@@ -1,6 +1,8 @@
 module github.com/sue445/terraform-version-updater
 
-go 1.22.1
+go 1.22
+
+toolchain go1.22.0
 
 require github.com/stretchr/testify v1.9.0
 
