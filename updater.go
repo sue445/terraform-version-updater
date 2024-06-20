@@ -1,7 +1,9 @@
 package updater
 
 import (
+	"log"
 	"os"
+	"strings"
 )
 
 // Execute performs major processing for updater
@@ -23,7 +25,7 @@ func Execute(targetVersion string, terraformVersionPath string) error {
 	})
 
 	if result == terraformVersionFile {
-		// version isn't updated
+		log.Printf("%s wasn't updated\n", terraformVersionPath)
 		return nil
 	}
 
@@ -31,6 +33,11 @@ func Execute(targetVersion string, terraformVersionPath string) error {
 	if err != nil {
 		return err
 	}
+
+	beforeVersion := strings.TrimSpace(terraformVersionFile)
+	afterVersion := strings.TrimSpace(result)
+
+	log.Printf("%s updated (%s -> %s)\n", terraformVersionPath, beforeVersion, afterVersion)
 
 	return nil
 }
