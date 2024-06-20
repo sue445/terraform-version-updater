@@ -15,6 +15,8 @@ var (
 	isPrintVersion bool
 
 	targetVersion string
+
+	terraformVersionPath string
 )
 
 func printVersion() {
@@ -28,6 +30,7 @@ func GetVersion() string {
 func init() {
 	flag.BoolVar(&isPrintVersion, "version", false, "Whether showing version")
 	flag.StringVar(&targetVersion, "target", "latest", "Version to be updated")
+	flag.StringVar(&terraformVersionPath, "file", ".terraform-version", "Path to .terraform-version file")
 }
 
 func main() {
