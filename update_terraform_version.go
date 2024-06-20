@@ -9,7 +9,7 @@ import (
 
 // UpdateTerraformVersion updates version in .terraform-version
 func UpdateTerraformVersion(src string, targetVersion string, versions []string) string {
-	if !regexp.MustCompile("^[0-9]+\\.[0-9]+\\.[0-9]+$").MatchString(strings.TrimSpace(src)) {
+	if !regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+$`).MatchString(strings.TrimSpace(src)) {
 		return src
 	}
 
