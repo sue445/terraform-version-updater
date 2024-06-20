@@ -7,19 +7,26 @@ import (
 	"strings"
 )
 
+// UpdateTerraformVersionParams represents UpdateTerraformVersion's params
+type UpdateTerraformVersionParams struct {
+	Src           string
+	TargetVersion string
+	Versions      []string
+}
+
 // UpdateTerraformVersion updates version in .terraform-version
-func UpdateTerraformVersion(src string, targetVersion string, versions []string) string {
-	if !regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+$`).MatchString(strings.TrimSpace(src)) {
-		return src
+func UpdateTerraformVersion(params *UpdateTerraformVersionParams) string {
+	if !regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+$`).MatchString(strings.TrimSpace(params.Src)) {
+		return params.Src
 	}
 
-	if targetVersion == "latest" {
-		return fmt.Sprintf("%s\n", versions[0])
+	if params.TargetVersion == "latest" {
+		return fmt.Sprintf("%s\n", params.Versions[0])
 	}
 
-	if slices.Contains(versions, targetVersion) {
-		return fmt.Sprintf("%s\n", targetVersion)
+	if slices.Contains(params.Versions, params.TargetVersion) {
+		return fmt.Sprintf("%s\n", params.TargetVersion)
 	}
 
-	return src
+	return params.Src
 }
