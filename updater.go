@@ -18,24 +18,24 @@ func Execute(targetVersion string, terraformVersionPath string) error {
 		return err
 	}
 
-	result := UpdateTerraformVersion(&UpdateTerraformVersionParams{
+	updatedVersionFile := UpdateTerraformVersion(&UpdateTerraformVersionParams{
 		Src:           terraformVersionFile,
 		TargetVersion: targetVersion,
 		Versions:      versions,
 	})
 
-	if result == terraformVersionFile {
+	if updatedVersionFile == terraformVersionFile {
 		log.Printf("%s wasn't updated\n", terraformVersionPath)
 		return nil
 	}
 
-	err = os.WriteFile(terraformVersionPath, []byte(result), 0644)
+	err = os.WriteFile(terraformVersionPath, []byte(updatedVersionFile), 0644)
 	if err != nil {
 		return err
 	}
 
 	beforeVersion := strings.TrimSpace(terraformVersionFile)
-	afterVersion := strings.TrimSpace(result)
+	afterVersion := strings.TrimSpace(updatedVersionFile)
 
 	log.Printf("%s updated (%s -> %s)\n", terraformVersionPath, beforeVersion, afterVersion)
 
