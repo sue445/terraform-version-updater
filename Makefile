@@ -8,8 +8,8 @@ LDFLAGS := "-s -w -X \"main.Version=$(VERSION)\" -X \"main.Revision=$(REVISION)\
 
 .DEFAULT_GOAL := bin/$(NAME)
 
-bin/$(NAME): $(SRCS)
-	go build -ldflags=$(LDFLAGS) -o bin/$(NAME)
+bin/%: cmd/%/main.go
+	go build -ldflags=$(LDFLAGS) -o bin/$(NAME) -o $@ $<
 
 .PHONY: clean
 clean:

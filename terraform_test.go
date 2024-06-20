@@ -1,8 +1,9 @@
-package main
+package updater_test
 
 import (
 	"github.com/jarcoal/httpmock"
 	"github.com/stretchr/testify/assert"
+	"github.com/sue445/terraform-version-updater"
 	"os"
 	"testing"
 )
@@ -246,7 +247,7 @@ func TestGetTerraformStableVersions(t *testing.T) {
 		"0.1.0",
 	}
 
-	got, err := GetTerraformStableVersions()
+	got, err := updater.GetTerraformStableVersions()
 	if assert.NoError(t, err) {
 		assert.Equal(t, want, got)
 	}
