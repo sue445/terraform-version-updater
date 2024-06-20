@@ -1,19 +1,20 @@
-package main
+package main_test
 
 import (
 	"github.com/stretchr/testify/assert"
+	"github.com/sue445/terraform-version-updater"
 	"testing"
 )
 
 func TestUpdateTerraformVersion(t *testing.T) {
 	tests := []struct {
 		name string
-		args *UpdateTerraformVersionParams
+		args *main.UpdateTerraformVersionParams
 		want string
 	}{
 		{
 			name: "Update to latest version",
-			args: &UpdateTerraformVersionParams{
+			args: &main.UpdateTerraformVersionParams{
 				Src:           "1.8.0\n",
 				TargetVersion: "latest",
 				Versions: []string{
@@ -29,7 +30,7 @@ func TestUpdateTerraformVersion(t *testing.T) {
 		},
 		{
 			name: "Update to specified version",
-			args: &UpdateTerraformVersionParams{
+			args: &main.UpdateTerraformVersionParams{
 				Src:           "1.8.0\n",
 				TargetVersion: "1.8.4",
 				Versions: []string{
@@ -45,7 +46,7 @@ func TestUpdateTerraformVersion(t *testing.T) {
 		},
 		{
 			name: "Doesn't Updated",
-			args: &UpdateTerraformVersionParams{
+			args: &main.UpdateTerraformVersionParams{
 				Src:           "1.8.0\n",
 				TargetVersion: "1.8.0",
 				Versions: []string{
@@ -61,7 +62,7 @@ func TestUpdateTerraformVersion(t *testing.T) {
 		},
 		{
 			name: ".terraform-version is invalid",
-			args: &UpdateTerraformVersionParams{
+			args: &main.UpdateTerraformVersionParams{
 				Src:           "abcdef\n",
 				TargetVersion: "1.8.0",
 				Versions: []string{
@@ -77,7 +78,7 @@ func TestUpdateTerraformVersion(t *testing.T) {
 		},
 		{
 			name: "targetVersion is unknown",
-			args: &UpdateTerraformVersionParams{
+			args: &main.UpdateTerraformVersionParams{
 				Src:           "1.8.0\n",
 				TargetVersion: "1.7.5",
 				Versions: []string{
@@ -94,7 +95,7 @@ func TestUpdateTerraformVersion(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := UpdateTerraformVersion(tt.args)
+			got := main.UpdateTerraformVersion(tt.args)
 			assert.Equal(t, tt.want, got)
 		})
 	}
