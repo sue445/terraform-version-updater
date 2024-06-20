@@ -6,22 +6,17 @@ import (
 )
 
 func TestUpdateTerraformVersion(t *testing.T) {
-	type args struct {
-		src           string
-		targetVersion string
-		versions      []string
-	}
 	tests := []struct {
 		name string
-		args args
+		args *UpdateTerraformVersionParams
 		want string
 	}{
 		{
 			name: "Update to latest version",
-			args: args{
-				src:           "1.8.0\n",
-				targetVersion: "latest",
-				versions: []string{
+			args: &UpdateTerraformVersionParams{
+				Src:           "1.8.0\n",
+				TargetVersion: "latest",
+				Versions: []string{
 					"1.8.5",
 					"1.8.4",
 					"1.8.3",
@@ -34,10 +29,10 @@ func TestUpdateTerraformVersion(t *testing.T) {
 		},
 		{
 			name: "Update to specified version",
-			args: args{
-				src:           "1.8.0\n",
-				targetVersion: "1.8.4",
-				versions: []string{
+			args: &UpdateTerraformVersionParams{
+				Src:           "1.8.0\n",
+				TargetVersion: "1.8.4",
+				Versions: []string{
 					"1.8.5",
 					"1.8.4",
 					"1.8.3",
@@ -50,10 +45,10 @@ func TestUpdateTerraformVersion(t *testing.T) {
 		},
 		{
 			name: "Doesn't Updated",
-			args: args{
-				src:           "1.8.0\n",
-				targetVersion: "1.8.0",
-				versions: []string{
+			args: &UpdateTerraformVersionParams{
+				Src:           "1.8.0\n",
+				TargetVersion: "1.8.0",
+				Versions: []string{
 					"1.8.5",
 					"1.8.4",
 					"1.8.3",
@@ -66,10 +61,10 @@ func TestUpdateTerraformVersion(t *testing.T) {
 		},
 		{
 			name: ".terraform-version is invalid",
-			args: args{
-				src:           "abcdef\n",
-				targetVersion: "1.8.0",
-				versions: []string{
+			args: &UpdateTerraformVersionParams{
+				Src:           "abcdef\n",
+				TargetVersion: "1.8.0",
+				Versions: []string{
 					"1.8.5",
 					"1.8.4",
 					"1.8.3",
@@ -82,10 +77,10 @@ func TestUpdateTerraformVersion(t *testing.T) {
 		},
 		{
 			name: "targetVersion is unknown",
-			args: args{
-				src:           "1.8.0\n",
-				targetVersion: "1.7.5",
-				versions: []string{
+			args: &UpdateTerraformVersionParams{
+				Src:           "1.8.0\n",
+				TargetVersion: "1.7.5",
+				Versions: []string{
 					"1.8.5",
 					"1.8.4",
 					"1.8.3",
@@ -99,7 +94,7 @@ func TestUpdateTerraformVersion(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := UpdateTerraformVersion(tt.args.src, tt.args.targetVersion, tt.args.versions)
+			got := UpdateTerraformVersion(tt.args)
 			assert.Equal(t, tt.want, got)
 		})
 	}
