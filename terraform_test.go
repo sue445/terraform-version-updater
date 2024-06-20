@@ -4,7 +4,6 @@ import (
 	"github.com/jarcoal/httpmock"
 	"github.com/stretchr/testify/assert"
 	"github.com/sue445/terraform-version-updater"
-	"os"
 	"testing"
 )
 
@@ -13,7 +12,7 @@ func TestGetTerraformStableVersions(t *testing.T) {
 	defer httpmock.DeactivateAndReset()
 
 	httpmock.RegisterResponder("GET", "https://releases.hashicorp.com/terraform/",
-		httpmock.NewStringResponder(200, ReadTestData("testdata/terraform-releases.html")))
+		httpmock.NewStringResponder(200, readFile(t, "testdata/terraform-releases.html")))
 
 	want := []string{
 		"1.8.5",
@@ -251,15 +250,4 @@ func TestGetTerraformStableVersions(t *testing.T) {
 	if assert.NoError(t, err) {
 		assert.Equal(t, want, got)
 	}
-}
-
-// ReadTestData returns testdata
-func ReadTestData(filename string) string {
-	buf, err := os.ReadFile(filename)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return string(buf)
 }

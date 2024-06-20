@@ -14,7 +14,7 @@ func TestExecute(t *testing.T) {
 	defer httpmock.DeactivateAndReset()
 
 	httpmock.RegisterResponder("GET", "https://releases.hashicorp.com/terraform/",
-		httpmock.NewStringResponder(200, ReadTestData("testdata/terraform-releases.html")))
+		httpmock.NewStringResponder(200, readFile(t, "testdata/terraform-releases.html")))
 
 	type args struct {
 		targetVersion        string
