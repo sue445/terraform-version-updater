@@ -13,6 +13,10 @@ var (
 	Revision string
 
 	isPrintVersion bool
+
+	targetVersion string
+
+	terraformVersionPath string
 )
 
 func printVersion() {
@@ -23,9 +27,13 @@ func GetVersion() string {
 	return fmt.Sprintf("terraform-version-updater %s (revision %s)", Version, Revision)
 }
 
-func main() {
+func init() {
 	flag.BoolVar(&isPrintVersion, "version", false, "Whether showing version")
+	flag.StringVar(&targetVersion, "target", "latest", "Version to be updated")
+	flag.StringVar(&terraformVersionPath, "file", ".terraform-version", "Path to .terraform-version file")
+}
 
+func main() {
 	flag.Parse()
 
 	if isPrintVersion {
