@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/sue445/terraform-version-updater"
+	"log"
 )
 
 var (
@@ -39,5 +41,10 @@ func main() {
 	if isPrintVersion {
 		printVersion()
 		return
+	}
+
+	err := updater.Execute(targetVersion, terraformVersionPath)
+	if err != nil {
+		log.Fatal(err)
 	}
 }
