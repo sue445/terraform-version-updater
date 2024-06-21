@@ -35,6 +35,15 @@ func TestExecute(t *testing.T) {
 			},
 			want: "1.8.5\n",
 		},
+		{
+			name: "Update to latest (dry-run)",
+			args: args{
+				targetVersion:        "latest",
+				terraformVersionFile: "1.8.0\n",
+				isDryRun:             true,
+			},
+			want: "1.8.0\n",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
