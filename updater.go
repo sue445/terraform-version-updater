@@ -1,13 +1,24 @@
 package updater
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"strings"
 )
 
+// Updater updates .terraform-version
+type Updater struct {
+	IsDryRun bool
+}
+
+// NewUpdater returns new Updater's instance
+func NewUpdater(isDryRun bool) *Updater {
+	return &Updater{IsDryRun: isDryRun}
+}
+
 // Execute performs major processing for updater
-func Execute(targetVersion string, terraformVersionPath string) error {
+func (u *Updater) Execute(targetVersion string, terraformVersionPath string) error {
 	terraformVersionFile, err := readFile(terraformVersionPath)
 	if err != nil {
 		return err
@@ -25,21 +36,30 @@ func Execute(targetVersion string, terraformVersionPath string) error {
 	})
 
 	if updatedVersionFile == terraformVersionFile {
-		log.Printf("%s wasn't updated\n", terraformVersionPath)
+		u.Info(fmt.Sprintf("%s wasn't updated", terraformVersionPath))
 		return nil
 	}
 
-	err = os.WriteFile(terraformVersionPath, []byte(updatedVersionFile), 0644)
-	if err != nil {
-		return err
+	if !u.IsDryRun {
+		err = os.WriteFile(terraformVersionPath, []byte(updatedVersionFile), 0644)
+		if err != nil {
+			return err
+		}
 	}
 
 	beforeVersion := strings.TrimSpace(terraformVersionFile)
 	afterVersion := strings.TrimSpace(updatedVersionFile)
 
-	log.Printf("%s updated (%s -> %s)\n", terraformVersionPath, beforeVersion, afterVersion)
+	u.Info(fmt.Sprintf("%s updated (%s -> %s)", terraformVersionPath, beforeVersion, afterVersion))
 
 	return nil
+}
+
+func (u *Updater) Info(message string) {
+	if u.IsDryRun {
+		message += " (dry-run)"
+	}
+	log.Println(message)
 }
 
 func readFile(file string) (string, error) {
