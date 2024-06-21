@@ -24,7 +24,7 @@ builds:
       - darwin
     main: ./cmd/terraform-version-updater/main.go
     ldflags:
-      - -s -w -X "main.Version={{.Version}}" -X "main.Revision={{.ShortCommit}}"
+      - -s -w -X "main.Version={{.Tag}}" -X "main.Revision={{.ShortCommit}}"
 
 archives:
   - format: tar.gz
