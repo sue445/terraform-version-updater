@@ -19,6 +19,7 @@ func TestExecute(t *testing.T) {
 	type args struct {
 		targetVersion        string
 		terraformVersionFile string
+		isDryRun             bool
 	}
 	tests := []struct {
 		name string
@@ -30,6 +31,7 @@ func TestExecute(t *testing.T) {
 			args: args{
 				targetVersion:        "latest",
 				terraformVersionFile: "1.8.0\n",
+				isDryRun:             false,
 			},
 			want: "1.8.5\n",
 		},
@@ -41,7 +43,7 @@ func TestExecute(t *testing.T) {
 			terraformVersionPath := filepath.Join(dir, ".terraform-version")
 			createFile(t, terraformVersionPath, tt.args.terraformVersionFile)
 
-			u := updater.NewUpdater()
+			u := updater.NewUpdater(tt.args.isDryRun)
 			err := u.Execute(tt.args.targetVersion, terraformVersionPath)
 			if assert.NoError(t, err) {
 				got := readFile(t, terraformVersionPath)

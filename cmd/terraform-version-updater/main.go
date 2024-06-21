@@ -19,6 +19,8 @@ var (
 	targetVersion string
 
 	terraformVersionPath string
+
+	isDryRun bool
 )
 
 func printVersion() {
@@ -33,6 +35,7 @@ func init() {
 	flag.BoolVar(&isPrintVersion, "version", false, "Whether showing version")
 	flag.StringVar(&targetVersion, "target", "latest", "Version to be updated")
 	flag.StringVar(&terraformVersionPath, "file", ".terraform-version", "Path to .terraform-version file")
+	flag.BoolVar(&isDryRun, "dry-run", false, "Whether dry-run")
 }
 
 func main() {
@@ -43,7 +46,7 @@ func main() {
 		return
 	}
 
-	u := updater.NewUpdater()
+	u := updater.NewUpdater(isDryRun)
 	err := u.Execute(targetVersion, terraformVersionPath)
 	if err != nil {
 		log.Fatal(err)

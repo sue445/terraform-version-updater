@@ -8,11 +8,12 @@ import (
 
 // Updater updates .terraform-version
 type Updater struct {
+	IsDryRun bool
 }
 
 // NewUpdater returns new Updater's instance
-func NewUpdater() *Updater {
-	return &Updater{}
+func NewUpdater(isDryRun bool) *Updater {
+	return &Updater{IsDryRun: isDryRun}
 }
 
 // Execute performs major processing for updater
