@@ -43,7 +43,8 @@ func main() {
 		return
 	}
 
-	err := updater.Execute(targetVersion, terraformVersionPath)
+	u := updater.NewUpdater()
+	err := u.Execute(targetVersion, terraformVersionPath)
 	if err != nil {
 		log.Fatal(err)
 	}

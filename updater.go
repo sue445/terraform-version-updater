@@ -6,8 +6,17 @@ import (
 	"strings"
 )
 
+// Updater updates .terraform-version
+type Updater struct {
+}
+
+// NewUpdater returns new Updater's instance
+func NewUpdater() *Updater {
+	return &Updater{}
+}
+
 // Execute performs major processing for updater
-func Execute(targetVersion string, terraformVersionPath string) error {
+func (u *Updater) Execute(targetVersion string, terraformVersionPath string) error {
 	terraformVersionFile, err := readFile(terraformVersionPath)
 	if err != nil {
 		return err

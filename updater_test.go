@@ -41,7 +41,8 @@ func TestExecute(t *testing.T) {
 			terraformVersionPath := filepath.Join(dir, ".terraform-version")
 			createFile(t, terraformVersionPath, tt.args.terraformVersionFile)
 
-			err := updater.Execute(tt.args.targetVersion, terraformVersionPath)
+			u := updater.NewUpdater()
+			err := u.Execute(tt.args.targetVersion, terraformVersionPath)
 			if assert.NoError(t, err) {
 				got := readFile(t, terraformVersionPath)
 				assert.Equal(t, tt.want, got)
