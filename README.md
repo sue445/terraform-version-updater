@@ -1,8 +1,11 @@
 # terraform-version-updater
 Automatically update [`.terraform-version`](https://github.com/tfutils/tfenv)
 
+[![Latest Version](https://img.shields.io/github/v/release/sue445/terraform-version-updater)](https://github.com/sue445/terraform-version-updater/releases)
 [![test](https://github.com/sue445/terraform-version-updater/actions/workflows/test.yml/badge.svg)](https://github.com/sue445/terraform-version-updater/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/github/sue445/terraform-version-updater/badge.svg)](https://coveralls.io/github/sue445/terraform-version-updater)
+[![Go Report Card](https://goreportcard.com/badge/github.com/sue445/terraform-version-updater)](https://goreportcard.com/report/github.com/sue445/terraform-version-updater)
+[![Go Reference](https://pkg.go.dev/badge/github.com/sue445/terraform-version-updater.svg)](https://pkg.go.dev/github.com/sue445/terraform-version-updater)
 
 ## Install
 Download latest binary from https://github.com/sue445/terraform-version-updater/releases
