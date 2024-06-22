@@ -117,9 +117,8 @@ When using this workflow, it is recommended to use `.terraform-version` in `hash
 e.g.
 
 ```yml
-- name: Set variables
-  run: |
-    echo "TERRAFORM_VERSION=$(cat .terraform-version)" >> $GITHUB_ENV
+- name: Add TERRAFORM_VERSION to GITHUB_ENV
+  run: echo "TERRAFORM_VERSION=$(cat .terraform-version)" >> $GITHUB_ENV
 
 - uses: hashicorp/setup-terraform@v3
   with:
