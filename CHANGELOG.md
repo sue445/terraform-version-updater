@@ -1,5 +1,11 @@
 ## Unreleased
-[full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.2...main)
+[full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.3...main)
+
+## [v0.1.3](https://github.com/sue445/terraform-version-updater/releases/tag/v0.1.3)
+[full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.2...v0.1.3)
+
+* Support both long and short options
+  * https://github.com/sue445/terraform-version-updater/pull/20
 
 ## [v0.1.2](https://github.com/sue445/terraform-version-updater/releases/tag/v0.1.2)
 [full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.1...v0.1.2)
