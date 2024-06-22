@@ -1,8 +1,8 @@
 package main
 
 import (
-	"flag"
 	"fmt"
+	"github.com/spf13/pflag"
 	"github.com/sue445/terraform-version-updater"
 	"log"
 )
@@ -13,14 +13,6 @@ var (
 
 	// Revision represents app revision (injected from ldflags)
 	Revision string
-
-	isPrintVersion bool
-
-	targetVersion string
-
-	terraformVersionPath string
-
-	isDryRun bool
 )
 
 func printVersion() {
@@ -31,23 +23,28 @@ func GetVersion() string {
 	return fmt.Sprintf("terraform-version-updater %s (revision %s)", Version, Revision)
 }
 
-func init() {
-	flag.BoolVar(&isPrintVersion, "version", false, "Whether showing version")
-	flag.StringVar(&targetVersion, "target", "latest", "Version to be updated")
-	flag.StringVar(&terraformVersionPath, "file", ".terraform-version", "Path to .terraform-version file")
-	flag.BoolVar(&isDryRun, "dry-run", false, "Whether dry-run")
-}
-
 func main() {
-	flag.Parse()
+	isPrintVersion := pflag.BoolP("version", "v", false, "Whether showing version")
+	targetVersion := pflag.StringP("target", "t", "latest", "Version to be updated")
+	terraformVersionPath := pflag.StringP("file", "f", ".terraform-version", "Path to .terraform-version file")
+	isDryRun := pflag.BoolP("dry-run", "d", false, "Whether dry-run")
+	isShowHelp := pflag.BoolP("help", "h", false, "Whether show help")
 
-	if isPrintVersion {
+	pflag.Parse()
+
+	if *isPrintVersion {
 		printVersion()
 		return
 	}
 
-	u := updater.NewUpdater(isDryRun)
-	err := u.Execute(targetVersion, terraformVersionPath)
+	if *isShowHelp {
+		fmt.Println("Usage of terraform-version-updater:")
+		pflag.PrintDefaults()
+		return
+	}
+
+	u := updater.NewUpdater(*isDryRun)
+	err := u.Execute(*targetVersion, *terraformVersionPath)
 	if err != nil {
 		log.Fatal(err)
 	}

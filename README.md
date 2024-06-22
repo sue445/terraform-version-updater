@@ -19,30 +19,27 @@ cd /path/to/terraform-repo
 terraform-version-updater
 
 # Update terraform to latest version (dry-run)
-terraform-version-updater -dry-run
+terraform-version-updater --dry-run
 
 # Update terraform to specified version
-terraform-version-updater -target 1.8.5
+terraform-version-updater --target 1.8.5
 
 # Update terraform to latest version with specified .terraform-version file
-terraform-version-updater -file /path/to/.terraform-version
+terraform-version-updater --file /path/to/.terraform-version
 
 # Show terraform-version-updater's version
-terraform-version-updater -version
+terraform-version-updater --version
 ```
 
 ## Usage
 ```bash
 $ terraform-version-updater --help
 Usage of terraform-version-updater:
-  -dry-run
-        Whether dry-run
-  -file string
-        Path to .terraform-version file (default ".terraform-version")
-  -target string
-        Version to be updated (default "latest")
-  -version
-        Whether showing version
+  -d, --dry-run         Whether dry-run
+  -f, --file string     Path to .terraform-version file (default ".terraform-version")
+  -h, --help            Whether show help
+  -t, --target string   Version to be updated (default "latest")
+  -v, --version         Whether showing version
 ```
 
 ## vs [tfupdate](https://github.com/minamijoyo/tfupdate)
