@@ -149,3 +149,9 @@ e.g.
     # Use steps.app-token.outputs.token instead of secrets.GITHUB_TOKEN
     token: ${{ steps.app-token.outputs.token }}
 ```
+
+App permissions required to create a Pull Request are as follows
+
+* Contents: Read and write
+* Metadata: Read-only
+* Pull requests: Read and write
