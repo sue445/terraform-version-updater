@@ -112,6 +112,20 @@ jobs:
             * See full diff in [compare view](https://github.com/hashicorp/terraform/compare/v${{ env.BEFORE_TERRAFORM_VERSION }}...v${{ env.AFTER_TERRAFORM_VERSION }})
 ```
 
+When using this workflow, it is recommended to use `.terraform-version` in `hashicorp/setup-terraform` as follows
+
+e.g.
+
+```yml
+- name: Set variables
+  run: |
+    echo "TERRAFORM_VERSION=$(cat .terraform-version)" >> $GITHUB_ENV
+
+- uses: hashicorp/setup-terraform@v3
+  with:
+    terraform_version: ${{ env.TERRAFORM_VERSION }}
+```
+
 ### Known problem
 GitHub Actions don't allow recursive builds.
 
