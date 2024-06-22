@@ -2,6 +2,7 @@
 Automatically update [`.terraform-version`](https://github.com/tfutils/tfenv)
 
 [![test](https://github.com/sue445/terraform-version-updater/actions/workflows/test.yml/badge.svg)](https://github.com/sue445/terraform-version-updater/actions/workflows/test.yml)
+[![Coverage Status](https://coveralls.io/repos/github/sue445/terraform-version-updater/badge.svg)](https://coveralls.io/github/sue445/terraform-version-updater)
 
 ## Install
 Download latest binary from https://github.com/sue445/terraform-version-updater/releases
