@@ -1,0 +1,6 @@
+linters-settings:
+  wrapcheck:
+
+linters:
+  enable:
+    - wrapcheck
