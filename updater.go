@@ -33,7 +33,7 @@ func (u *Updater) Execute(targetVersion string, terraformVersionPath string) err
 	updatedVersionFile := UpdateTerraformVersion(&UpdateTerraformVersionParams{
 		Src:           terraformVersionFile,
 		TargetVersion: targetVersion,
-		Versions:      versions,
+		Versions:        versions,
 	})
 
 	if updatedVersionFile == terraformVersionFile {
