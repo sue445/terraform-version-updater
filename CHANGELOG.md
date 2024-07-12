@@ -1,5 +1,11 @@
 ## Unreleased
-[full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.3...main)
+[full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.4...main)
+
+## [v0.1.4](https://github.com/sue445/terraform-version-updater/releases/tag/v0.1.4)
+[full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.3...v0.1.4)
+
+* Wrap all errors with `errors.WithStack`
+  * https://github.com/sue445/terraform-version-updater/pull/25
 
 ## [v0.1.3](https://github.com/sue445/terraform-version-updater/releases/tag/v0.1.3)
 [full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.2...v0.1.3)
