@@ -9,7 +9,7 @@ import (
 
 // GetTerraformStableVersions returns all stable versions from https://releases.hashicorp.com/terraform/
 func GetTerraformStableVersions() ([]string, error) {
-	html, err := getTerraformReleasesHtml()
+	html, err := getTerraformReleasesHTML()
 	if err != nil {
 		return []string{}, errors.WithStack(err)
 	}
@@ -26,7 +26,7 @@ func GetTerraformStableVersions() ([]string, error) {
 	return versions, nil
 }
 
-func getTerraformReleasesHtml() (string, error) {
+func getTerraformReleasesHTML() (string, error) {
 	// c.f. https://github.com/tfutils/tfenv/blob/master/libexec/tfenv-list-remote
 	res, err := http.Get("https://releases.hashicorp.com/terraform/")
 	if err != nil {
