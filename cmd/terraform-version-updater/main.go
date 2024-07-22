@@ -16,10 +16,10 @@ var (
 )
 
 func printVersion() {
-	fmt.Println(GetVersion())
+	fmt.Println(getVersion())
 }
 
-func GetVersion() string {
+func getVersion() string {
 	return fmt.Sprintf("terraform-version-updater %s (revision %s)", Version, Revision)
 }
 

@@ -37,7 +37,7 @@ func (u *Updater) Execute(targetVersion string, terraformVersionPath string) err
 	})
 
 	if updatedVersionFile == terraformVersionFile {
-		u.Info(fmt.Sprintf("%s wasn't updated", terraformVersionPath))
+		u.info(fmt.Sprintf("%s wasn't updated", terraformVersionPath))
 		return nil
 	}
 
@@ -51,12 +51,12 @@ func (u *Updater) Execute(targetVersion string, terraformVersionPath string) err
 	beforeVersion := strings.TrimSpace(terraformVersionFile)
 	afterVersion := strings.TrimSpace(updatedVersionFile)
 
-	u.Info(fmt.Sprintf("%s updated (%s -> %s)", terraformVersionPath, beforeVersion, afterVersion))
+	u.info(fmt.Sprintf("%s updated (%s -> %s)", terraformVersionPath, beforeVersion, afterVersion))
 
 	return nil
 }
 
-func (u *Updater) Info(message string) {
+func (u *Updater) info(message string) {
 	if u.IsDryRun {
 		message += " (dry-run)"
 	}
