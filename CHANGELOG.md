@@ -1,5 +1,12 @@
 ## Unreleased
-[full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.5...main)
+[full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.6...main)
+
+## [v0.1.6](https://github.com/sue445/terraform-version-updater/releases/tag/v0.1.6)
+[full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.5...v0.1.6)
+
+* Upgrade to Go 1.24 :rocket:
+  * https://github.com/sue445/terraform-version-updater/pull/35
+* Update dependencies
 
 ## [v0.1.5](https://github.com/sue445/terraform-version-updater/releases/tag/v0.1.5)
 [full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.4...v0.1.5)
