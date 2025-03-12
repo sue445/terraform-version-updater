@@ -12,7 +12,7 @@ Download latest binary from https://github.com/sue445/terraform-version-updater/
 
 ## Build
 ```bash
-go install github.com/sue445/terraform-version-updater@latest
+go install github.com/sue445/terraform-version-updater/cmd/terraform-version-updater@latest
 ```
 
 ## Example
