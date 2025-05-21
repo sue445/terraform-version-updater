@@ -10,8 +10,7 @@ import (
 )
 
 func TestExecute(t *testing.T) {
-	httpmock.Activate()
-	defer httpmock.DeactivateAndReset()
+	httpmock.Activate(t)
 
 	httpmock.RegisterResponder("GET", "https://releases.hashicorp.com/terraform/",
 		httpmock.NewStringResponder(200, readFile(t, "testdata/terraform-releases.html")))
