@@ -5,7 +5,7 @@ go 1.24
 require (
 	github.com/cockroachdb/errors v1.12.0
 	github.com/jarcoal/httpmock v1.4.0
-	github.com/spf13/pflag v1.0.6
+	github.com/spf13/pflag v1.0.7
 	github.com/stretchr/testify v1.10.0
 )
 
