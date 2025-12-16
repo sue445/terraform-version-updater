@@ -13,9 +13,6 @@ on:
 env:
   TEST_ARGS: -coverprofile coverage.out -covermode atomic
 
-  # c.f. https://github.com/golangci/golangci-lint/blob/main/CHANGELOG.md
-  GOLANGCI_LINT_VERSION: v2.4
-
 permissions:
   contents: read
   pull-requests: read
@@ -61,7 +58,7 @@ jobs:
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v9
         with:
-          version: ${{ env.GOLANGCI_LINT_VERSION }}
+          version-file: .golangci-lint-version
 
       - name: Slack Notification (not success)
         uses: act10ns/slack@v2
