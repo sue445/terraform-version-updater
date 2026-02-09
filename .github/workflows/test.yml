@@ -22,9 +22,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - uses: actions/setup-go@v6
+      - uses: actions/setup-go@7a3fe6cf4cb3a834922a1244abfce67bcef6a0c5 # v6.2.0
         with:
           go-version-file: "go.mod"
 
@@ -32,7 +32,7 @@ jobs:
       - run: make testrace
 
       - name: Coveralls
-        uses: coverallsapp/github-action@v2
+        uses: coverallsapp/github-action@5cbfd81b66ca5d10c19b062c04de0199c215fb6e # v2.3.7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           file: coverage.out
@@ -40,7 +40,7 @@ jobs:
           fail-on-error: false
 
       - name: Slack Notification (not success)
-        uses: act10ns/slack@v2
+        uses: act10ns/slack@cfcc30955fe9377f4f55e1079e5419ee1014269f # v2
         if: "! success()"
         continue-on-error: true
         with:
@@ -51,17 +51,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-go@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/setup-go@7a3fe6cf4cb3a834922a1244abfce67bcef6a0c5 # v6.2.0
         with:
           go-version-file: "go.mod"
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v9
+        uses: golangci/golangci-lint-action@1e7e51e771db61008b38414a730f564565cf7c20 # v9.2.0
         with:
           version-file: .golangci-lint-version
 
       - name: Slack Notification (not success)
-        uses: act10ns/slack@v2
+        uses: act10ns/slack@cfcc30955fe9377f4f55e1079e5419ee1014269f # v2
         if: "! success()"
         continue-on-error: true
         with:
