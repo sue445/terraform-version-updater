@@ -2,10 +2,11 @@ package updater
 
 import (
 	"fmt"
-	"github.com/cockroachdb/errors"
 	"log"
 	"os"
 	"strings"
+
+	"github.com/cockroachdb/errors"
 )
 
 // Updater updates .terraform-version
@@ -19,7 +20,7 @@ func NewUpdater(isDryRun bool) *Updater {
 }
 
 // Execute performs major processing for updater
-func (u *Updater) Execute(targetVersion string, terraformVersionPath string) error {
+func (u *Updater) Execute(targetVersion string, terraformVersionPath string, cooldownDays int) error {
 	terraformVersionFile, err := readFile(terraformVersionPath)
 	if err != nil {
 		return errors.WithStack(err)
