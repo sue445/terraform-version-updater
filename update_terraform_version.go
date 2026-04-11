@@ -65,6 +65,6 @@ func UpdateTerraformVersion(params *UpdateTerraformVersionParams) (string, error
 	return params.Src, nil
 }
 
-func days(days int) time.Duration {
-	return time.Duration(days) * 24 * time.Hour
+func days(numDays int) time.Duration {
+	return time.Duration(numDays) * 24 * time.Hour
 }
