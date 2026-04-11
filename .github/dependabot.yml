@@ -34,3 +34,5 @@ updates:
     cooldown:
       default-days: 7
   ###########################################################
+      exclude:
+        - "github.com/sue445/ghrcooldown"
