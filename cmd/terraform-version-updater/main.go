@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/spf13/pflag"
 	"github.com/sue445/terraform-version-updater"
-	"log"
 )
 
 var (
@@ -29,6 +30,7 @@ func main() {
 	terraformVersionPath := pflag.StringP("file", "f", ".terraform-version", "Path to .terraform-version file")
 	isDryRun := pflag.BoolP("dry-run", "d", false, "Whether dry-run")
 	isShowHelp := pflag.BoolP("help", "h", false, "Whether show help")
+	cooldownDays := pflag.IntP("cooldown-days", "c", 0, "Cooldown days to respect when fetching the latest Terraform version (0 to disable)")
 
 	pflag.Parse()
 
@@ -43,8 +45,8 @@ func main() {
 		return
 	}
 
-	u := updater.NewUpdater(*isDryRun)
-	err := u.Execute(*targetVersion, *terraformVersionPath)
+	u := updater.NewUpdater(*isDryRun, Version)
+	err := u.Execute(*targetVersion, *terraformVersionPath, *cooldownDays)
 	if err != nil {
 		log.Fatal(err)
 	}

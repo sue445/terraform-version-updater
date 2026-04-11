@@ -1,19 +1,23 @@
 package updater_test
 
 import (
-	"github.com/jarcoal/httpmock"
-	"github.com/stretchr/testify/assert"
-	"github.com/sue445/terraform-version-updater"
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/jarcoal/httpmock"
+	"github.com/stretchr/testify/assert"
+	"github.com/sue445/terraform-version-updater"
 )
 
 func TestExecute(t *testing.T) {
 	httpmock.Activate(t)
 
-	httpmock.RegisterResponder("GET", "https://releases.hashicorp.com/terraform/",
-		httpmock.NewStringResponder(200, readFile(t, "testdata/terraform-releases.html")))
+	httpmock.RegisterResponder(
+		"GET",
+		"https://api.github.com/repos/hashicorp/terraform/releases?per_page=10",
+		httpmock.NewStringResponder(200, readFile(t, "testdata/terraform-releases.json")),
+	)
 
 	type args struct {
 		targetVersion        string
@@ -32,7 +36,7 @@ func TestExecute(t *testing.T) {
 				terraformVersionFile: "1.8.0\n",
 				isDryRun:             false,
 			},
-			want: "1.8.5\n",
+			want: "1.14.8\n",
 		},
 		{
 			name: "Update to latest (dry-run)",
@@ -60,8 +64,8 @@ func TestExecute(t *testing.T) {
 			terraformVersionPath := filepath.Join(dir, ".terraform-version")
 			createFile(t, terraformVersionPath, tt.args.terraformVersionFile)
 
-			u := updater.NewUpdater(tt.args.isDryRun)
-			err := u.Execute(tt.args.targetVersion, terraformVersionPath)
+			u := updater.NewUpdater(tt.args.isDryRun, "1.2.3")
+			err := u.Execute(tt.args.targetVersion, terraformVersionPath, 7)
 			if assert.NoError(t, err) {
 				got := readFile(t, terraformVersionPath)
 				assert.Equal(t, tt.want, got)

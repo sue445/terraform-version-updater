@@ -1,6 +1,12 @@
 ## Unreleased
 [full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.8...main)
 
+* **BREAKING CHANGES** :bomb:
+  * Now uses the GitHub API. We highly recommend setting the `GITHUB_TOKEN` environment variable; otherwise, [IP-based rate limits](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api) will apply.
+  * Now throws an error when specifying a non-existent version for `--target`.
+* Add `--cooldown-days`
+  * https://github.com/sue445/terraform-version-updater/pull/73
+
 ## [v0.1.8](https://github.com/sue445/terraform-version-updater/releases/tag/v0.1.8)
 [full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.7...v0.1.8)
 

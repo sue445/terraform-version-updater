@@ -19,8 +19,13 @@ go install github.com/sue445/terraform-version-updater/cmd/terraform-version-upd
 ```bash
 cd /path/to/terraform-repo
 
+GITHUB_TOKEN=xxxxxx
+
 # Update terraform to latest version
 terraform-version-updater
+
+# Update terraform to latest version with cooldown days
+terraform-version-updater --cooldown-days 7
 
 # Update terraform to latest version (dry-run)
 terraform-version-updater --dry-run
@@ -35,20 +40,24 @@ terraform-version-updater --file /path/to/.terraform-version
 terraform-version-updater --version
 ```
 
+Now uses the GitHub API. We highly recommend setting the `GITHUB_TOKEN` environment variable; otherwise, [IP-based rate limits](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api) will apply.
+
 ## Usage
 ```bash
 $ terraform-version-updater --help
 Usage of terraform-version-updater:
-  -d, --dry-run         Whether dry-run
-  -f, --file string     Path to .terraform-version file (default ".terraform-version")
-  -h, --help            Whether show help
-  -t, --target string   Version to be updated (default "latest")
-  -v, --version         Whether showing version
+  -c, --cooldown-days int   Cooldown days to respect when fetching the latest Terraform version (0 to disable)
+  -d, --dry-run             Whether dry-run
+  -f, --file string         Path to .terraform-version file (default ".terraform-version")
+  -h, --help                Whether show help
+  -t, --target string       Version to be updated (default "latest")
+  -v, --version             Whether showing version
 ```
 
 ## vs [tfupdate](https://github.com/minamijoyo/tfupdate)
 * _terraform-version-updater_ supports `.terraform-version`
 * _tfupdate_ supports `required_version` in `*.tf`
+* _terraform-version-updater_ supports cooldown
 
 ## GitHub Actions Example
 Put the following yaml to your repository (e.g. `.github/workflows/terraform-version-updater.yml`)
@@ -93,6 +102,8 @@ jobs:
 
       - name: Run terraform-version-updater
         run: terraform-version-updater
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add AFTER_TERRAFORM_VERSION to GITHUB_ENV
         run: echo "AFTER_TERRAFORM_VERSION=$(cat .terraform-version)" >> $GITHUB_ENV

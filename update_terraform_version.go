@@ -1,32 +1,74 @@
 package updater
 
 import (
+	"context"
 	"fmt"
+	"os"
 	"regexp"
-	"slices"
 	"strings"
+	"time"
+
+	"github.com/cockroachdb/errors"
+	"github.com/sue445/ghrcooldown"
 )
 
 // UpdateTerraformVersionParams represents UpdateTerraformVersion's params
 type UpdateTerraformVersionParams struct {
-	Src           string
-	TargetVersion string
-	Versions      []string
+	Src            string
+	TargetVersion  string
+	UpdaterVersion string
+	CooldownDays   int
+	CurrentTime    *time.Time
 }
 
 // UpdateTerraformVersion updates version in .terraform-version
-func UpdateTerraformVersion(params *UpdateTerraformVersionParams) string {
+func UpdateTerraformVersion(params *UpdateTerraformVersionParams) (string, error) {
 	if !regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+$`).MatchString(strings.TrimSpace(params.Src)) {
-		return params.Src
+		return params.Src, nil
 	}
 
+	if fmt.Sprintf("%s\n", params.TargetVersion) == params.Src {
+		return params.Src, nil
+	}
+
+	client, err := ghrcooldown.NewClient(&ghrcooldown.ClientParams{
+		Token:       os.Getenv("GITHUB_TOKEN"),
+		UserAgent:   fmt.Sprintf("terraform-version-updater/%s (+https://github.com/sue445/terraform-version-updater)", params.UpdaterVersion),
+		CurrentTime: params.CurrentTime,
+	})
+
+	if err != nil {
+		return "", errors.WithStack(err)
+	}
+
+	cooldownDays := params.CooldownDays
+	if cooldownDays < 0 {
+		cooldownDays = 0
+	}
+
+	cooldown := days(cooldownDays)
 	if params.TargetVersion == "latest" {
-		return fmt.Sprintf("%s\n", params.Versions[0])
+		tagName, err := client.GetLatestTagName(context.Background(), "hashicorp", "terraform", cooldown)
+		if err != nil {
+			return "", errors.WithStack(err)
+		}
+
+		version := strings.TrimPrefix(tagName, "v")
+		return fmt.Sprintf("%s\n", version), nil
 	}
 
-	if slices.Contains(params.Versions, params.TargetVersion) {
-		return fmt.Sprintf("%s\n", params.TargetVersion)
+	hasPassed, err := client.HasCooldownPassed(context.Background(), "hashicorp", "terraform", fmt.Sprintf("v%s", params.TargetVersion), cooldown)
+	if err != nil {
+		return "", errors.WithStack(err)
 	}
 
-	return params.Src
+	if hasPassed {
+		return fmt.Sprintf("%s\n", params.TargetVersion), nil
+	}
+
+	return params.Src, nil
+}
+
+func days(numDays int) time.Duration {
+	return time.Duration(numDays) * 24 * time.Hour
 }
