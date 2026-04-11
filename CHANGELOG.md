@@ -3,7 +3,7 @@
 
 * **BREAKING CHANGES** :bomb:
   * Now uses the GitHub API. We highly recommend setting the `GITHUB_TOKEN` environment variable; otherwise, [IP-based rate limits](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api) will apply.
-  * Now throws an error when specifying a non-existent version for `--target-version`.
+  * Now throws an error when specifying a non-existent version for `--target`.
 * Add `--cooldown-days`
   * https://github.com/sue445/terraform-version-updater/pull/73
 
