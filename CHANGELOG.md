@@ -1,5 +1,8 @@
 ## Unreleased
-[full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.8...main)
+[full changelog](http://github.com/sue445/terraform-version-updater/compare/v1.0.8...main)
+
+## [v1.0.0](https://github.com/sue445/terraform-version-updater/releases/tag/v1.0.0)
+[full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.8...v1.0.0)
 
 * **BREAKING CHANGES** :bomb:
   * Now uses the GitHub API. We highly recommend setting the `GITHUB_TOKEN` environment variable; otherwise, [IP-based rate limits](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api) will apply.
