@@ -18,7 +18,7 @@ type UpdateTerraformVersionParams struct {
 	TargetVersion  string
 	UpdaterVersion string
 	CooldownDays   int
-	CurrentTime    time.Time
+	CurrentTime    *time.Time
 }
 
 // UpdateTerraformVersion updates version in .terraform-version
@@ -34,7 +34,7 @@ func UpdateTerraformVersion(params *UpdateTerraformVersionParams) (string, error
 	client, err := ghrcooldown.NewClient(&ghrcooldown.ClientParams{
 		Token:       os.Getenv("GITHUB_TOKEN"),
 		UserAgent:   fmt.Sprintf("terraform-version-updater/%s (+https://github.com/sue445/terraform-version-updater)", params.UpdaterVersion),
-		CurrentTime: &params.CurrentTime,
+		CurrentTime: params.CurrentTime,
 	})
 
 	if err != nil {

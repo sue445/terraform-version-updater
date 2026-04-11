@@ -37,7 +37,7 @@ func TestUpdateTerraformVersion_Success(t *testing.T) {
 			args: &updater.UpdateTerraformVersionParams{
 				Src:           "1.8.0\n",
 				TargetVersion: "latest",
-				CurrentTime:   time.Date(2026, 3, 26, 0, 0, 0, 0, time.UTC),
+				CurrentTime:   new(time.Date(2026, 3, 26, 0, 0, 0, 0, time.UTC)),
 				CooldownDays:  7,
 			},
 			want: "1.14.7\n",
@@ -47,7 +47,7 @@ func TestUpdateTerraformVersion_Success(t *testing.T) {
 			args: &updater.UpdateTerraformVersionParams{
 				Src:           "1.8.0\n",
 				TargetVersion: "1.14.8",
-				CurrentTime:   time.Date(2026, 3, 26, 0, 0, 0, 0, time.UTC),
+				CurrentTime:   new(time.Date(2026, 3, 26, 0, 0, 0, 0, time.UTC)),
 				CooldownDays:  0,
 			},
 			want: "1.14.8\n",
@@ -57,7 +57,7 @@ func TestUpdateTerraformVersion_Success(t *testing.T) {
 			args: &updater.UpdateTerraformVersionParams{
 				Src:           "1.8.0\n",
 				TargetVersion: "1.8.0",
-				CurrentTime:   time.Date(2026, 3, 26, 0, 0, 0, 0, time.UTC),
+				CurrentTime:   new(time.Date(2026, 3, 26, 0, 0, 0, 0, time.UTC)),
 				CooldownDays:  7,
 			},
 			want: "1.8.0\n",
@@ -67,7 +67,7 @@ func TestUpdateTerraformVersion_Success(t *testing.T) {
 			args: &updater.UpdateTerraformVersionParams{
 				Src:           "abcdef\n",
 				TargetVersion: "1.8.0",
-				CurrentTime:   time.Date(2026, 3, 26, 0, 0, 0, 0, time.UTC),
+				CurrentTime:   new(time.Date(2026, 3, 26, 0, 0, 0, 0, time.UTC)),
 				CooldownDays:  7,
 			},
 			want: "abcdef\n",
@@ -95,7 +95,7 @@ func TestUpdateTerraformVersion_TargetVersionIsUnknown(t *testing.T) {
 	_, err := updater.UpdateTerraformVersion(&updater.UpdateTerraformVersionParams{
 		Src:           "1.8.0\n",
 		TargetVersion: "1.14.0-unknown",
-		CurrentTime:   time.Date(2026, 3, 26, 0, 0, 0, 0, time.UTC),
+		CurrentTime:   new(time.Date(2026, 3, 26, 0, 0, 0, 0, time.UTC)),
 		CooldownDays:  7,
 	})
 

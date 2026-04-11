@@ -33,7 +33,7 @@ func (u *Updater) Execute(targetVersion string, terraformVersionPath string, coo
 		TargetVersion:  targetVersion,
 		UpdaterVersion: u.UpdaterVersion,
 		CooldownDays:   cooldownDays,
-		CurrentTime:    time.Now(),
+		CurrentTime:    new(time.Now()),
 	})
 	if err != nil {
 		return errors.WithStack(err)
