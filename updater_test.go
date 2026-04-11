@@ -1,12 +1,13 @@
 package updater_test
 
 import (
-	"github.com/jarcoal/httpmock"
-	"github.com/stretchr/testify/assert"
-	"github.com/sue445/terraform-version-updater"
 	"os"
 	"path/filepath"
 	"testing"
+
+	"github.com/jarcoal/httpmock"
+	"github.com/stretchr/testify/assert"
+	"github.com/sue445/terraform-version-updater"
 )
 
 func TestExecute(t *testing.T) {
@@ -60,8 +61,8 @@ func TestExecute(t *testing.T) {
 			terraformVersionPath := filepath.Join(dir, ".terraform-version")
 			createFile(t, terraformVersionPath, tt.args.terraformVersionFile)
 
-			u := updater.NewUpdater(tt.args.isDryRun)
-			err := u.Execute(tt.args.targetVersion, terraformVersionPath)
+			u := updater.NewUpdater(tt.args.isDryRun, "1.2.3")
+			err := u.Execute(tt.args.targetVersion, terraformVersionPath, 7)
 			if assert.NoError(t, err) {
 				got := readFile(t, terraformVersionPath)
 				assert.Equal(t, tt.want, got)

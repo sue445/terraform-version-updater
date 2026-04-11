@@ -45,7 +45,7 @@ func main() {
 		return
 	}
 
-	u := updater.NewUpdater(*isDryRun)
+	u := updater.NewUpdater(*isDryRun, Version)
 	err := u.Execute(*targetVersion, *terraformVersionPath, *cooldownDays)
 	if err != nil {
 		log.Fatal(err)

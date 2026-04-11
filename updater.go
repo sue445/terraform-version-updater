@@ -5,18 +5,20 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/cockroachdb/errors"
 )
 
 // Updater updates .terraform-version
 type Updater struct {
-	IsDryRun bool
+	IsDryRun       bool
+	UpdaterVersion string
 }
 
 // NewUpdater returns new Updater's instance
-func NewUpdater(isDryRun bool) *Updater {
-	return &Updater{IsDryRun: isDryRun}
+func NewUpdater(isDryRun bool, version string) *Updater {
+	return &Updater{IsDryRun: isDryRun, UpdaterVersion: version}
 }
 
 // Execute performs major processing for updater
@@ -26,16 +28,16 @@ func (u *Updater) Execute(targetVersion string, terraformVersionPath string, coo
 		return errors.WithStack(err)
 	}
 
-	versions, err := GetTerraformStableVersions()
+	updatedVersionFile, err := UpdateTerraformVersion(&UpdateTerraformVersionParams{
+		Src:            terraformVersionFile,
+		TargetVersion:  targetVersion,
+		UpdaterVersion: u.UpdaterVersion,
+		CooldownDays:   cooldownDays,
+		CurrentTime:    time.Now(),
+	})
 	if err != nil {
 		return errors.WithStack(err)
 	}
-
-	updatedVersionFile := UpdateTerraformVersion(&UpdateTerraformVersionParams{
-		Src:           terraformVersionFile,
-		TargetVersion: targetVersion,
-		Versions:      versions,
-	})
 
 	if updatedVersionFile == terraformVersionFile {
 		u.info(fmt.Sprintf("%s wasn't updated", terraformVersionPath))
