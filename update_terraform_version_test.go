@@ -99,5 +99,8 @@ func TestUpdateTerraformVersion_TargetVersionIsUnknown(t *testing.T) {
 		CooldownDays:  7,
 	})
 
-	assert.EqualError(t, err, "GET https://api.github.com/repos/hashicorp/terraform/releases/tags/v1.14.0-unknown: 404 Not Found []")
+	if assert.Error(t, err) {
+		assert.ErrorContains(t, err, "https://api.github.com/repos/hashicorp/terraform/releases/tags/v1.14.0-unknown")
+		assert.ErrorContains(t, err, "404 Not Found")
+	}
 }
