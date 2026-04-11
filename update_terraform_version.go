@@ -41,8 +41,12 @@ func UpdateTerraformVersion(params *UpdateTerraformVersionParams) (string, error
 		return "", errors.WithStack(err)
 	}
 
-	cooldown := days(params.CooldownDays)
+	cooldownDays := params.CooldownDays
+	if cooldownDays < 0 {
+		cooldownDays = 0
+	}
 
+	cooldown := days(cooldownDays)
 	if params.TargetVersion == "latest" {
 		tagName, err := client.GetLatestTagName(context.Background(), "hashicorp", "terraform", cooldown)
 		if err != nil {
