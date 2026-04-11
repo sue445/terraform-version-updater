@@ -102,6 +102,8 @@ jobs:
 
       - name: Run terraform-version-updater
         run: terraform-version-updater
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Add AFTER_TERRAFORM_VERSION to GITHUB_ENV
         run: echo "AFTER_TERRAFORM_VERSION=$(cat .terraform-version)" >> $GITHUB_ENV
