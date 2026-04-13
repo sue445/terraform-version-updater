@@ -30,7 +30,7 @@ func main() {
 	terraformVersionPath := pflag.StringP("file", "f", ".terraform-version", "Path to .terraform-version file")
 	isDryRun := pflag.BoolP("dry-run", "d", false, "Whether dry-run")
 	isShowHelp := pflag.BoolP("help", "h", false, "Whether show help")
-	cooldownDays := pflag.IntP("cooldown-days", "c", 0, "Cooldown days to respect when fetching the latest Terraform version (0 to disable)")
+	cooldownDays := pflag.IntP("cooldown-days", "c", 0, "Cooldown days to respect when fetching the latest Terraform version (default 0 to disable)")
 
 	pflag.Parse()
 
