@@ -101,7 +101,7 @@ jobs:
         run: echo "BEFORE_TERRAFORM_VERSION=$(cat .terraform-version)" >> $GITHUB_ENV
 
       - name: Run terraform-version-updater
-        run: terraform-version-updater
+        run: terraform-version-updater --cooldown-days 7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
