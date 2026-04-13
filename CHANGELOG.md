@@ -1,5 +1,11 @@
 ## Unreleased
-[full changelog](http://github.com/sue445/terraform-version-updater/compare/v1.0.8...main)
+[full changelog](http://github.com/sue445/terraform-version-updater/compare/v1.0.1...main)
+
+## [v1.0.1](https://github.com/sue445/terraform-version-updater/releases/tag/v1.0.1)
+[full changelog](http://github.com/sue445/terraform-version-updater/compare/v1.0.0...v1.0.1)
+
+* Tweak help for `--cooldown-days`
+  * https://github.com/sue445/terraform-version-updater/pull/74
 
 ## [v1.0.0](https://github.com/sue445/terraform-version-updater/releases/tag/v1.0.0)
 [full changelog](http://github.com/sue445/terraform-version-updater/compare/v0.1.8...v1.0.0)
