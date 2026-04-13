@@ -46,7 +46,7 @@ Now uses the GitHub API. We highly recommend setting the `GITHUB_TOKEN` environm
 ```bash
 $ terraform-version-updater --help
 Usage of terraform-version-updater:
-  -c, --cooldown-days int   Cooldown days to respect when fetching the latest Terraform version (0 to disable)
+  -c, --cooldown-days int   Cooldown days to respect when fetching the latest Terraform version (default 0 to disable)
   -d, --dry-run             Whether dry-run
   -f, --file string         Path to .terraform-version file (default ".terraform-version")
   -h, --help                Whether show help
