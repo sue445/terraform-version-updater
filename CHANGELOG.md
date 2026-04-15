@@ -1,5 +1,11 @@
 ## Unreleased
-[full changelog](http://github.com/sue445/terraform-version-updater/compare/v1.0.1...main)
+[full changelog](http://github.com/sue445/terraform-version-updater/compare/v1.0.2...main)
+
+## [v1.0.2](https://github.com/sue445/terraform-version-updater/releases/tag/v1.0.2)
+[full changelog](http://github.com/sue445/terraform-version-updater/compare/v1.0.1...v1.0.2)
+
+* Re-release binary
+  * https://github.com/sue445/terraform-version-updater/pull/75
 
 ## [v1.0.1](https://github.com/sue445/terraform-version-updater/releases/tag/v1.0.1)
 [full changelog](http://github.com/sue445/terraform-version-updater/compare/v1.0.0...v1.0.1)
