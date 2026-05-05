@@ -77,11 +77,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Get latest release info
         id: get_latest_release
-        uses: octokit/request-action@v2.x
+        uses: octokit/request-action@v3.x
         with:
           route: GET /repos/sue445/terraform-version-updater/releases/latest
         env:
@@ -109,7 +109,7 @@ jobs:
         run: echo "AFTER_TERRAFORM_VERSION=$(cat .terraform-version)" >> $GITHUB_ENV
 
       - name: Create Terraform version up PullRequest
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v8
         with:
           token:          ${{ secrets.GITHUB_TOKEN }}
           title:          "Bump Terraform from ${{ env.BEFORE_TERRAFORM_VERSION }} to ${{ env.AFTER_TERRAFORM_VERSION }}"
@@ -131,7 +131,7 @@ e.g.
 - name: Add TERRAFORM_VERSION to GITHUB_ENV
   run: echo "TERRAFORM_VERSION=$(cat .terraform-version)" >> $GITHUB_ENV
 
-- uses: hashicorp/setup-terraform@v3
+- uses: hashicorp/setup-terraform@v4
   with:
     terraform_version: ${{ env.TERRAFORM_VERSION }}
 ```
@@ -148,14 +148,14 @@ Therefore, the use of App Token by [`actions/create-github-app-token`](https://g
 e.g.
 
 ```yml
-- uses: actions/create-github-app-token@v1
+- uses: actions/create-github-app-token@v3
   id: app-token
   with:
     app-id: ${{ secrets.APP_ID }}
     private-key: ${{ secrets.PRIVATE_KEY }}
 
 - name: Create Terraform version up PullRequest
-  uses: peter-evans/create-pull-request@v6
+  uses: peter-evans/create-pull-request@v8
   with:
     # Use steps.app-token.outputs.token instead of secrets.GITHUB_TOKEN
     token: ${{ steps.app-token.outputs.token }}
