@@ -1,6 +1,6 @@
 module github.com/sue445/terraform-version-updater
 
-go 1.26.0
+go 1.27
 
 require (
 	github.com/cockroachdb/errors v1.14.0
