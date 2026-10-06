@@ -7,7 +7,7 @@ require (
 	github.com/jarcoal/httpmock v1.4.2
 	github.com/spf13/pflag v1.0.10
 	github.com/stretchr/testify v1.12.1
-	github.com/sue445/ghrcooldown v0.2.1
+	github.com/sue445/ghrcooldown v0.3.0
 )
 
 require (
@@ -15,7 +15,7 @@ require (
 	github.com/cockroachdb/redact v1.1.8 // indirect
 	github.com/getsentry/sentry-go v0.46.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
-	github.com/google/go-github/v84 v84.0.0 // indirect
+	github.com/google/go-github/v92 v92.0.0 // indirect
 	github.com/google/go-querystring v1.2.0 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
 	github.com/kr/text v0.2.0 // indirect
