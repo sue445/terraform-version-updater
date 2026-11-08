@@ -5,7 +5,7 @@ go 1.27
 require (
 	github.com/cockroachdb/errors v1.14.0
 	github.com/jarcoal/httpmock v1.4.2
-	github.com/spf13/pflag v1.0.10
+	github.com/spf13/pflag v1.1.0
 	github.com/stretchr/testify v1.12.1
 	github.com/sue445/ghrcooldown v0.3.0
 )
