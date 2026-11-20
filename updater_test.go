@@ -75,7 +75,7 @@ func TestExecute(t *testing.T) {
 }
 
 func createFile(t *testing.T, file string, content string) {
-	err := os.WriteFile(file, []byte(content), 0644)
+	err := os.WriteFile(file, []byte(content), 0600)
 
 	if err != nil {
 		t.Fatalf("Failed to create file: %v", err)

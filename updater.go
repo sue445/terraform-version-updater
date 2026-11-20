@@ -45,7 +45,7 @@ func (u *Updater) Execute(targetVersion string, terraformVersionPath string, coo
 	}
 
 	if !u.IsDryRun {
-		err = os.WriteFile(terraformVersionPath, []byte(updatedVersionFile), 0644)
+		err = os.WriteFile(terraformVersionPath, []byte(updatedVersionFile), 0600)
 		if err != nil {
 			return errors.WithStack(err)
 		}
