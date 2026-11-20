@@ -1,5 +1,12 @@
 ## Unreleased
-[full changelog](http://github.com/sue445/terraform-version-updater/compare/v1.0.3...main)
+[full changelog](http://github.com/sue445/terraform-version-updater/compare/v1.0.4...main)
+
+## [v1.0.4](https://github.com/sue445/terraform-version-updater/releases/tag/v1.0.4)
+[full changelog](http://github.com/sue445/terraform-version-updater/compare/v1.0.3...v1.0.4)
+
+* Introduce gosec
+  * https://github.com/sue445/terraform-version-updater/pull/103
+* Update dependencies
 
 ## [v1.0.3](https://github.com/sue445/terraform-version-updater/releases/tag/v1.0.3)
 [full changelog](http://github.com/sue445/terraform-version-updater/compare/v1.0.2...v1.0.3)
